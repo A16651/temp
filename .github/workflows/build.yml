@@ -49,4 +49,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ffmpeg-windows-x64
-          path: native/windows/x64
+          path: /d/a/temp/native/windows/x64
+      - name: Show output location
+        shell: msys2 {0}
+        run: |
+          echo "Repo:"
+          pwd
+          echo "Find output:"
+          find /d/a -name libavcodec.a 2>/dev/null || true
