@@ -8,7 +8,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check tools
+        shell: msys2 {0}
+        run: |
+          which gcc
+          which nm
+          which llvm-nm || true
+          which nasm || true
+          ls /mingw64/bin | grep nm
+            - uses: actions/checkout@v4
 
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
