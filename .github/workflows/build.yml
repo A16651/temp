@@ -8,7 +8,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
@@ -19,21 +20,31 @@ jobs:
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-make
             mingw-w64-x86_64-nasm
+            tar
+            curl
 
       - name: Debug toolchain
         shell: msys2 {0}
         run: |
-          echo "===== TOOL CHECK ====="
-          which gcc
-          which g++
+          echo "===== TOOLCHAIN ====="
+          which gcc || true
+          which g++ || true
           which nm || true
-          which llvm-nm || true
+          which ar || true
+          which ranlib || true
           which nasm || true
-          ls /mingw64/bin | grep nm || true
-          echo "======================"
+          echo "====================="
+          ls /mingw64/bin | grep -E 'nm|ar|ranlib|nasm' || true
 
       - name: Build FFmpeg
         shell: msys2 {0}
         run: |
           chmod +x build_ffmpeg_windows.sh
           ./build_ffmpeg_windows.sh
+
+      - name: Upload Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-windows-x64
+          path: native/windows/x64
