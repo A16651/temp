@@ -54,8 +54,9 @@ cd "${FFMPEG_SRC}"
 # ── Configure ─────────────────────────────────────────────────────────────────
 echo "[2/4] Configuring for Windows x64…"
 ./configure \
-    --cross-prefix=x86_64-w64-mingw32- \
-    --nm=llvm-nm \
+    --disable-x86asm \
+    --cc=gcc \
+    --cxx=g++ \
     --arch=x86_64 \
     --target-os=mingw32 \
     --enable-static \
