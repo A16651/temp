@@ -77,11 +77,11 @@ echo "[2/4] Configuring for Windows x64..."
 
 # ── Build ──────────────────────────────────────────────────────────────────────
 echo "[3/4] Building (this takes 5–10 minutes)…"
-make -j"$(nproc)" 
+mingw32-make -j4
 
 # ── Install ───────────────────────────────────────────────────────────────────
 echo "[4/4] Installing to ${OUTPUT_DIR}…"
-make install
+mingw32-make install
 
 echo ""
 echo "============================================================"
