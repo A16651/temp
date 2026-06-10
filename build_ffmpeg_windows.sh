@@ -33,7 +33,7 @@ FFMPEG_VERSION="6.1.1"
 FFMPEG_SRC="ffmpeg-${FFMPEG_VERSION}"
 FFMPEG_ARCHIVE="${FFMPEG_SRC}.tar.bz2"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+PROJECT_ROOT="$SCRIPT_DIR"
 OUTPUT_DIR="${PROJECT_ROOT}/native/windows/x64"
 
 echo "============================================================"
