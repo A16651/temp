@@ -1,0 +1,34 @@
+name: Build FFmpeg Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-make
+            tar
+            curl
+
+      - name: Build FFmpeg
+        shell: msys2 {0}
+        run: |
+          chmod +x build_ffmpeg_windows.sh
+          ./build_ffmpeg_windows.sh
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-windows-x64
+          path: native/windows/x64
