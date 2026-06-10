@@ -52,7 +52,7 @@ fi
 cd "${FFMPEG_SRC}"
 
 # ── Configure ─────────────────────────────────────────────────────────────────
-echo "[2/4] Configuring for Windows x64…"
+echo "[2/4] Configuring for Windows x64..."
 ./configure \
     --disable-x86asm \
     --cc=gcc \
@@ -68,7 +68,6 @@ echo "[2/4] Configuring for Windows x64…"
     --enable-demuxer=mov,mp4,mp3,wav,aac,matroska,avi \
     --enable-decoder=aac,mp3,flac,pcm_s16le,pcm_s16be,vorbis,opus,h264,hevc \
     --enable-parser=aac,mp3,flac,h264,hevc \
-    
     --enable-swresample \
     --disable-avfilter \
     --disable-avdevice \
