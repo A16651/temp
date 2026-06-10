@@ -55,6 +55,7 @@ cd "${FFMPEG_SRC}"
 echo "[2/4] Configuring for Windows x64…"
 ./configure \
     --cross-prefix=x86_64-w64-mingw32- \
+    --nm=llvm-nm \
     --arch=x86_64 \
     --target-os=mingw32 \
     --enable-static \
@@ -66,7 +67,7 @@ echo "[2/4] Configuring for Windows x64…"
     --enable-demuxer=mov,mp4,mp3,wav,aac,matroska,avi \
     --enable-decoder=aac,mp3,flac,pcm_s16le,pcm_s16be,vorbis,opus,h264,hevc \
     --enable-parser=aac,mp3,flac,h264,hevc \
-    --enable-filter=aresample \
+    
     --enable-swresample \
     --disable-avfilter \
     --disable-avdevice \
@@ -76,7 +77,7 @@ echo "[2/4] Configuring for Windows x64…"
 
 # ── Build ──────────────────────────────────────────────────────────────────────
 echo "[3/4] Building (this takes 5–10 minutes)…"
-make -j"$(nproc)" 2>&1 | tail -20
+make -j"$(nproc)" 
 
 # ── Install ───────────────────────────────────────────────────────────────────
 echo "[4/4] Installing to ${OUTPUT_DIR}…"
